@@ -2,8 +2,10 @@
 
 from extractor.qualys import get_host_from_qualys
 from extractor.crowdstrike import get_host_from_crowdstrikes
+from extractor.scanned_host import get_scanned_host
 from transformation.qualys_transformation import qualys_host_transformation
 from transformation.crowdstrikes_transformation import crowdstrikes_host_transformation
+from transformation.scanned_host_transformation import scanned_host_transformation
 from data_dedups.data_deduper import find_duplicate_hosts
 from storage.mongo_storage import persist_dedups_hosts
 from visualization.visualization import op_sys_vizualize, older_host_and_new_host_visualization
@@ -16,13 +18,19 @@ def main():
     get_qualys_hosts = get_host_from_qualys(Q_C_API_KEY)
     #fetching data from crowdstrikes
     get_crowdstrikes_hosts = get_host_from_crowdstrikes(Q_C_API_KEY)
+    #fetching data from tenable
+    get_scanned_hosts = get_scanned_host(Q_C_API_KEY)
 
     #data modeling
     transform_host = [qualys_host_transformation(host) for host in get_qualys_hosts]
     transform_host.extend([crowdstrikes_host_transformation(host) for host in get_crowdstrikes_hosts])
+    transform_host.extend([scanned_host_transformation(host) for host in get_scanned_hosts])
 
+
+    transform_host = [host for host in transform_host if host]
     #filtering duplicate hosts
     dup_hosts =  find_duplicate_hosts(transform_host)
+    #print("dup_host: ", dup_hosts)
 
     #persisting in db
     persist_dedups_hosts(dup_hosts)
