@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "6723feabb5a172f3422409c4"
+  },
+  "id": 305003660,
+  "hostname": "ip-172-31-19-223.ec2.internal",
+  "os": "Linux",
+  "last_seen": "2023-07-26T04:20:52.000Z",
+  "source": "qualys"
+},
+{
+  "_id": {
+    "$oid": "6723feabb5a172f3422409c5"
+  },
+  "id": "e64d9e3eb9f24f44818240d7f9ad4ebc",
+  "hostname": "ip-172-31-93-76.ec2.internal",
+  "os": "Amazon Linux 2",
+  "last_seen": "2023-03-16T13:34:47Z",
+  "source": "crowdstrike"
+},
+{
+  "_id": {
+    "$oid": "6723feabb5a172f3422409c6"
+  },
+  "id": "7f9b9520-44d2-4e3f-832c-061065c8de12",
+  "hostname": "ip-172-31-27-66.ec2.internal",
+  "os": "Linux Kernel 5.10.130-118.517.amzn2.x86_64 on Amazon Linux 2",
+  "last_seen": "2023-09-05T19:09:40.923Z",
+  "source": "tenable"
+}]
